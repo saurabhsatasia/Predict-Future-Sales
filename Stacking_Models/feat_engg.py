@@ -18,6 +18,7 @@ class Feature_Eng:
         # How much each item's price changed from its (lowest/highest) historical price.
         train_monthly['price_increase'] = train_monthly['item_price'] - train_monthly['hist_min_item_price']
         train_monthly['price_decrease'] = train_monthly['hist_max_item_price'] - train_monthly['item_price']
+        return train_monthly
 
     def roll_window_features(self, train_monthly):
         # Min value
@@ -52,7 +53,7 @@ class Feature_Eng:
             train_monthly[ft_name].fillna(0, inplace=True)
         return  train_monthly
 
-    def item_sales_cnt_trade(self, train_monthly):
+    def item_sales_cnt_trend(self, train_monthly):
         lag_list = [1, 2, 3]
         train_monthly['item_trend'] = train_monthly['item_cnt']
 
@@ -64,4 +65,3 @@ class Feature_Eng:
 
         return train_monthly
 
-    
